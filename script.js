@@ -18,7 +18,9 @@ buttons.map((button) => {
         } catch {
           display.innerText = "Error!";
         }
-
+        break;
+      case "X":
+        display.innerText += "*";
         break;
       default:
         display.innerText += e.target.innerText;

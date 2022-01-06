@@ -53,6 +53,7 @@ body {
   font-weight: 700;
   margin-right: 2rem;
   font-size: 2rem;
+  word-wrap: break-word;
 }
 
 .calc_buttons {
