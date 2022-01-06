@@ -75,6 +75,13 @@ body {
   border-radius: 0.5rem;
   font-weight: 700;
   color: hsl(221, 14%, 31%);
+  text-align: center;
+  cursor: pointer;
+}
+
+.calc_keys:hover {
+  background-color:hsl(29, 56%, 82%); 
+  transition: 0.5s ease-in-out;
 }
 .reset {
   grid-area: auto / span 2;
