@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- displays site properly based on user's device -->
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="32x32"
+      href="./images/favicon-32x32.png"
+    />
+    <!-- Font and CSS -->
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css?family=Spartan"
+    />
+    <link rel="stylesheet" href="style.css" />
+
+    <title>Frontend Mentor | Calculator app</title>
+  </head>
+
+  <body>
+    <div id="calc_app">
+      <!-- Calculator head -->
+      <header class="header">
+        <h1 class="calc_logo">calc</h1>
+        <div class="calc_theme">
+          <p class="theme_options">
+            <span>1</span><span>2</span><span>3</span>
+          </p>
+          <p class="theme_heading">THEME</p>
+        </div>
+      </header>
+
+      <!-- Calculator Display -->
+      <main>
+        <div class="calc_display">
+          <div id="calc_display_digit">399,981</div>
+        </div>
+
+        <!-- Calculator Keys -->
+        <section class="calc_buttons">
+          <!-- Row 1 -->
+          <button class="calc_keys">7</button>
+          <button class="calc_keys">8</button>
+          <button class="calc_keys">9</button>
+          <button class="calc_keys delete">DEL</button>
+          <!-- Row 2 -->
+          <button class="calc_keys">4</button>
+          <button class="calc_keys">5</button>
+          <button class="calc_keys">6</button>
+          <button class="calc_keys">+</button>
+          <!-- Row 3 -->
+          <button class="calc_keys">1</button>
+          <button class="calc_keys">2</button>
+          <button class="calc_keys">3</button>
+          <button class="calc_keys">-</button>
+          <!-- Row 4 -->
+          <button class="calc_keys">.</button>
+          <button class="calc_keys">0</button>
+          <button class="calc_keys operator">/</button>
+          <button class="calc_keys multiply">*</button>
+          <!-- Row 5 -->
+          <button class="calc_keys reset">RESET</button>
+          <button class="calc_keys equal">=</button>
+        </section>
+      </main>
+      <footer>
+        <script src="/script.js"></script>
+      </footer>
+    </div>
+  </body>
+</html>
