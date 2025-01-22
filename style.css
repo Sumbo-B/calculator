@@ -5,7 +5,7 @@
 }
 
 body {
-  background: hsl(222, 26%, 31%);
+  background: hsl(221, 92%, 15%);
   font-family: "Spartan", sans-serif;
   padding: 2rem;
   height: 100vh;
@@ -80,7 +80,7 @@ body {
 }
 
 .calc_keys:hover {
-  background-color:hsl(29, 56%, 82%); 
+  background-color: hsl(29, 56%, 82%);
   transition: 0.5s ease-in-out;
 }
 .reset {
