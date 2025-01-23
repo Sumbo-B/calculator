@@ -104,52 +104,12 @@ body {
   transform: scale(1.05);
 }
 
-.delete {
+.delete, .reset, .equal {
   background: hsl(225, 21%, 49%);
   color: #fff;
   box-shadow: 0px 4px hsl(224, 28%, 35%);
-}
-
-.delete:hover {
-  background: hsl(225, 35%, 65%);
-}
-
-.reset {
-  grid-column: span 2;
-  background: hsl(225, 21%, 49%);
-  color: #fff;
-  box-shadow: 0px 4px hsl(224, 28%, 35%);
-}
-
-.reset:hover {
-  background: hsl(225, 35%, 65%);
-}
-
-.equal {
-  grid-column: span 2;
-  background: hsl(6, 63%, 50%);
-  color: #fff;
-  box-shadow: 0px 4px hsl(6, 70%, 34%);
 }
 
 .equal:hover {
   background: hsl(6, 70%, 40%);
-  transform: scale(1.05);
-}
-
-/* Improve Responsiveness */
-@media (max-width: 480px) {
-  #calc_app {
-    max-width: 320px;
-    padding: 1rem;
-  }
-
-  .calc_display {
-    height: 70px;
-  }
-
-  .calc_keys {
-    font-size: 1.2rem;
-    padding: 8px;
-  }
 }
