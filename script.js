@@ -1,37 +1,42 @@
-let display = document.getElementById("calc_display_digit");
-let buttons = Array.from(document.querySelectorAll(".calc_keys button"));
+const display = document.getElementById("calc_display_digit");
+const buttons = Array.from(document.querySelectorAll(".calc_keys button"));
 
 // Helper Functions
-function resetDisplay() {
+const resetDisplay = () => {
   display.innerText = "";
-}
+};
 
-function deleteLastCharacter() {
-  display.innerText = display.innerText.slice(0, -1);
-}
+const deleteLastCharacter = () => {
+  if (display.innerText.length > 0) {
+    display.innerText = display.innerText.slice(0, -1);
+  }
+};
 
-function calculateResult() {
+const calculateResult = () => {
   try {
-    // Use `Function` for safer evaluation
-    const result = Function(
-      `'use strict'; return (${display.innerText.replace(/X/g, "*")})`
-    )();
-    display.innerText = result;
+    const sanitizedInput = display.innerText.replace(/X/g, "*");
+    const result = Function(`'use strict'; return (${sanitizedInput})`)();
+    display.innerText = Number.isFinite(result) ? result : "Error! Try Again";
   } catch {
     display.innerText = "Error! Try Again";
   }
-}
+};
 
-function appendCharacter(char) {
+const appendCharacter = (char) => {
   const lastChar = display.innerText.slice(-1);
 
-  // Prevent multiple operators in a row
-  if (/[+\-*/.]/.test(lastChar) && /[+\-*/.]/.test(char)) return;
+  // Prevent multiple operators or invalid initial input
+  if (
+    (!display.innerText && /[+\-*/.]/.test(char)) || // Prevent starting with an operator
+    (/[+\-*/.]/.test(lastChar) && /[+\-*/.]/.test(char)) // Prevent consecutive operators
+  ) {
+    return;
+  }
 
   display.innerText += char;
-}
+};
 
-// Add Event Listeners
+// Add Event Listeners to Buttons
 buttons.forEach((button) => {
   button.addEventListener("click", (e) => {
     const char = e.target.innerText;
@@ -62,6 +67,7 @@ document.addEventListener("keydown", (e) => {
   if (/[0-9+\-*/().]/.test(key)) {
     appendCharacter(key);
   } else if (key === "Enter") {
+    e.preventDefault(); // Prevent accidental form submissions
     calculateResult();
   } else if (key === "Backspace") {
     deleteLastCharacter();
