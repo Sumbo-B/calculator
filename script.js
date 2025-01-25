@@ -1,47 +1,62 @@
 const display = document.getElementById("calc_display_digit");
 const buttons = Array.from(document.querySelectorAll(".calc_keys"));
 
-const resetDisplay = () => {
-  display.innerText = "0";
-};
+let memory = 0;
 
-const deleteLastCharacter = () => {
-  display.innerText =
-    display.innerText.length > 1 ? display.innerText.slice(0, -1) : "0";
-};
+const resetDisplay = () => (display.innerText = "0");
+
+const deleteLastCharacter = () =>
+  (display.innerText = display.innerText.slice(0, -1) || "0");
 
 const calculateResult = () => {
   try {
-    const sanitizedInput = display.innerText.replace(/X/g, "*");
-    const result = Function(`'use strict'; return (${sanitizedInput})`)();
+    const result = Function(
+      `'use strict'; return (${display.innerText.replace(/X/g, "*")})`
+    )();
     display.innerText = Number.isFinite(result) ? result : "Error";
   } catch {
     display.innerText = "Error";
   }
 };
 
-const appendCharacter = (char) => {
-  if (display.innerText === "0" && !/[+\-*/.%]/.test(char)) {
-    display.innerText = char;
-  } else {
-    display.innerText += char;
+const handleAdvancedOperation = (char) => {
+  const value = parseFloat(display.innerText);
+
+  switch (char) {
+    case "%":
+      display.innerText = value / 100;
+      break;
+    case "√":
+      display.innerText = Math.sqrt(value);
+      break;
+    case "xⁿ":
+      const power = prompt("Enter the power:");
+      display.innerText = Math.pow(value, parseFloat(power) || 1);
+      break;
+    case "n!":
+      const factorial = (n) => (n <= 1 ? 1 : n * factorial(n - 1));
+      display.innerText = factorial(value);
+      break;
+    case "±":
+      display.innerText = value * -1;
+      break;
   }
 };
 
-const handleAdvancedOperation = (char) => {
-  let currentValue = parseFloat(display.innerText);
+const handleMemoryOperation = (char) => {
+  const value = parseFloat(display.innerText);
   switch (char) {
-    case "%":
-      display.innerText = currentValue / 100;
+    case "MC":
+      memory = 0;
       break;
-    case "√":
-      display.innerText = Math.sqrt(currentValue);
+    case "MR":
+      display.innerText = memory;
       break;
-    case "x²":
-      display.innerText = currentValue ** 2;
+    case "M+":
+      memory += value;
       break;
-    case "±":
-      display.innerText = currentValue * -1;
+    case "M-":
+      memory -= value;
       break;
   }
 };
@@ -51,17 +66,20 @@ buttons.forEach((button) => {
     const char = e.target.innerText;
 
     if (!isNaN(char) || char === ".") {
-      appendCharacter(char);
-    } else if (char === "RESET") {
-      resetDisplay();
-    } else if (char === "DEL") {
-      deleteLastCharacter();
-    } else if (char === "=") {
-      calculateResult();
-    } else if (["%", "√", "x²", "±"].includes(char)) {
+      display.innerText =
+        display.innerText === "0" ? char : display.innerText + char;
+    } else if (["RESET", "DEL", "="].includes(char)) {
+      char === "RESET"
+        ? resetDisplay()
+        : char === "DEL"
+        ? deleteLastCharacter()
+        : calculateResult();
+    } else if (["%", "√", "xⁿ", "n!", "±"].includes(char)) {
       handleAdvancedOperation(char);
+    } else if (["MC", "MR", "M+", "M-"].includes(char)) {
+      handleMemoryOperation(char);
     } else {
-      appendCharacter(char);
+      display.innerText += char;
     }
   });
 });
